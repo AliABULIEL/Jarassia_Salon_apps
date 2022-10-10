@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231984378071",
+    "project_id": "eldonbarber-56b7e",
+    "storage_bucket": "eldonbarber-56b7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231984378071:android:beda9f153d282bb79e4092",
+        "android_client_info": {
+          "package_name": "ac.il.eldon_barber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHf4E2tmL1e9AnO81cw2EoU182Z6NtETY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
