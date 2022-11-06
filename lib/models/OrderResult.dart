@@ -18,6 +18,7 @@ class OrderResult {
   Time time;
   Order order ;
   User user ;
+  String paymentUrl ;
 
   OrderResult.fromJson(Map<dynamic, dynamic> json) {
     List ml = json['services'];
@@ -49,7 +50,10 @@ class OrderResult {
       user = User.fromJson(json["client"]);
     }
 
-  }
+    if(json["payment_url"] != null) {
+      paymentUrl = json["payment_url"];
+    }
+    }
 
   getServiceIds(){
     var ids = [];

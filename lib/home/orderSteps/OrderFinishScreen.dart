@@ -13,6 +13,8 @@ import 'package:salon_app/models/User.dart';
 import '../../Extensions.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
+import '../../shop/CreditCardWebView.dart';
+
 
 class OrderFinishScreen extends StatefulWidget{
 
@@ -125,7 +127,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                       _serviceNameView(size),
                       _serviceDateView(size),
                       _serviceTimeView(),
-                      (orderResult != null && orderResult.order != null && orderResult.order.canEdit == false) == false ? _serviceCashOrCard() : SizedBox(),
+                      (widget.order != null || widget.isEdit == true ) == false && DataManager.shared.business.creditCardPayment == true ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -159,7 +161,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                                 }
                                 },
                               child: Text(
-                                (widget.order != null || widget.isEdit == true )? language[widget.isEdit == true ? "save" : "update"] : language["sure"],
+                                (widget.order != null || widget.isEdit == true ) ? language[widget.isEdit == true ? "save" : "update"] : language["sure"],
                                 style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: DataManager.shared.fontName()),
                               ),
                             ),
@@ -224,11 +226,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
   }
 
   submitData() async{
-    if (this._currentSelection == 1 ) {
 
-
-      return;
-    }
     title = language["success_order_message"];
     _showLoadingAlert();
     this.newMap["business_id"] = Buissness_id;
@@ -238,7 +236,11 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****");
       print(data);
       if (data != null) {
-        _showSuccesAlert();
+        if (data.paymentUrl != null) {
+          _goToCreditCardView(data.paymentUrl);
+        }else{
+          _showSuccesAlert();
+        }
       }else{
         setState(() {
           maxTime = true;
@@ -249,14 +251,21 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****2");
       print(data);
       if (data != null) {
-        _showSuccesAlert();
+        if (data.paymentUrl != null) {
+          _goToCreditCardView(data.paymentUrl);
+        }else{
+          _showSuccesAlert();
+        }
       }else{
         setState(() {
           maxTime = true;
         });
       }
     }
+  }
 
+  _goToCreditCardView(String url) {
+    Navigator.of(context).push(_createRoute(CreditCardWebView(url: url ,isFromOrder: true,)));
   }
 
   cancelOrder() async{
@@ -657,6 +666,11 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
             onSegmentChosen: (index) {
               setState(() {
                 _currentSelection = index;
+                if (index == 1) {
+                  this.newMap["payment_method"] = "credit_card";
+                }else{
+                  this.newMap["payment_method"] = "cash";
+                }
               });
             },
           ),

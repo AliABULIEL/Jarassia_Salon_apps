@@ -6,7 +6,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 class CreditCardWebView extends StatefulWidget {
 
   String url;
-  CreditCardWebView({this.url});
+  bool isFromOrder;
+  CreditCardWebView({this.url,this.isFromOrder});
 
   @override
   _CreditCardWebViewState createState() => _CreditCardWebViewState();
@@ -41,7 +42,11 @@ class _CreditCardWebViewState extends State<CreditCardWebView> {
               width: 40,
               height: 40,
               child:  InkWell(onTap: ()=>{
-                Navigator.pop(context)
+                if (widget.isFromOrder ) {
+                  Navigator.of(context).popUntil((route) => route.isFirst)
+                }else{
+                  Navigator.pop(context)
+                }
               }, child: Icon(Icons.arrow_forward_ios,color: _darkModeEnabled ? Colors.white:Colors.black,)//Image.asset("assets/images/editProfile.png",color: Colors.black,)
               ),
             )

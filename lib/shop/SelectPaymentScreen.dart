@@ -54,6 +54,7 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
 
     );
 
+    var color = _darkModeEnabled ? Colors.black : Colors.white;
     return Scaffold(
       appBar: appBar,
       backgroundColor: _darkModeEnabled ? Color(0xff252322) : Color(0xffF1F1F1),
@@ -68,8 +69,15 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
               child: Container(
                 width: size.width * 0.3,
                 height: size.width * 0.3,
-                color: Colors.red,
-                child: Center(child: Text("Cash")),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: color,
+                    border: Border.all(
+                        width: 2 ,
+                        color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                    )
+
+                ),                child: Center(child: _itemView(language["cash"])),
               ),
             ),
             InkWell(
@@ -79,11 +87,37 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
               child: Container(
                 width: size.width * 0.3,
                 height: size.width * 0.3,
-                color: Colors.red,
-                child: Center(child: Text("Credit Card")),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: color,
+                    border: Border.all(
+                        width: 2 ,
+                        color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                    )
+
+                ),
+                child: Center(child: _itemView(language["credit_card"])),
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  _itemView(String title){
+    return  Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(title,style: TextStyle(fontWeight:  FontWeight.bold , color: _darkModeEnabled ? Colors.white.withOpacity(1) : Colors.black.withOpacity(1),fontSize: 16,fontFamily: DataManager.shared.fontName()),),
+            ],
+          ),
         ),
       ),
     );
@@ -98,14 +132,13 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
     if (isCredit == true && dictionary["payment_url"] != null) {
       var urlPayment = dictionary["payment_url"];
       Navigator.of(context).push(_createRoute(urlPayment));
-
     }
   }
 
   Route _createRoute(url) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) =>  CreditCardWebView(url:url),
+      pageBuilder: (context, animation, secondaryAnimation) =>  CreditCardWebView(url:url,isFromOrder: false,),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(-1.0, 0.0);
         var end = Offset.zero;
