@@ -108,9 +108,9 @@
   "add_waiting_list" : "الإضافة إلى قائمة الانتظار",
   "max_time" : "لا يوجد مكان في هذا الوقت",
   "delete_user" : "هل تريد حذق المستخدم?",
-  "delete_user_label": "מחק משתמש"
-
-
-
+  "delete_user_label": "מחק משתמש",
+  "payment_method": "طريقه الدفع",
+  "cash": "نقدي",
+  "credit_card" : " بطاقة الائتمان"
 
 }

@@ -107,7 +107,9 @@
   "sub_title_rating" : "איך היה השירות?",
   "max_time" : "אין מקום בשעה הזאת",
   "delete_user" : "האם אתה רוצה למחוק המשתמש?",
-  "delete_user_label": "מחק משתמש"
-
+  "delete_user_label": "מחק משתמש",
+  "payment_method": "אמצעי תשלום",
+  "cash": "מזומן",
+  "credit_card" : "כרטיס אשראי"
 
 }

@@ -11,6 +11,7 @@ import 'package:salon_app/models/Order.dart';
 import 'package:salon_app/models/OrderResult.dart';
 import 'package:salon_app/models/User.dart';
 import '../../Extensions.dart';
+import 'package:material_segmented_control/material_segmented_control.dart';
 
 
 class OrderFinishScreen extends StatefulWidget{
@@ -124,6 +125,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                       _serviceNameView(size),
                       _serviceDateView(size),
                       _serviceTimeView(),
+                      (orderResult != null && orderResult.order != null && orderResult.order.canEdit == false) == false ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -222,6 +224,11 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
   }
 
   submitData() async{
+    if (this._currentSelection == 1 ) {
+
+
+      return;
+    }
     title = language["success_order_message"];
     _showLoadingAlert();
     this.newMap["business_id"] = Buissness_id;
@@ -631,6 +638,40 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
           ),
       );
   }
+  int _currentSelection = 0;
+  _serviceCashOrCard(){
+    return  Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MaterialSegmentedControl(
+            horizontalPadding: EdgeInsets.all(14),
+            children: _children,
+            selectionIndex: _currentSelection,
+            borderColor: Colors.grey,
+            selectedColor: HexColor.fromHex(DataManager.shared.business.pColor),
+            unselectedColor: Colors.white,
+            borderRadius: 6.0,
+            //disabledChildren: _disabledIndices,
+            verticalOffset: 8.0,
+            onSegmentChosen: (index) {
+              setState(() {
+                _currentSelection = index;
+              });
+            },
+          ),
+          Text(language["payment_method"],style: TextStyle(color: Colors.grey,fontSize: 17,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+
+        ],
+      )
+    );
+  }
+
+  Map<int, Widget> _children = {
+    0: Text(language['cash']),
+    1 : Text( " " + language['credit_card'] + " ")
+
+  };
 
   _maxOrderPopup(Size size) {
     return Container(

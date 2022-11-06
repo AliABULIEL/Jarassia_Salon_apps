@@ -170,7 +170,7 @@ class _MarketScreenState extends State<MarketScreen> {
               Navigator.of(context).push(_createRoute(product:product));
             },
             child: Container(
-              decoration: BoxDecoration(
+              decoration:  product.images.length == 0 ? null : BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(

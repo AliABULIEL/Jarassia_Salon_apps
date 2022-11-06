@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:salon_app/managers/Datamanager.dart';
 import 'package:salon_app/models/DemoLocalizations.dart';
 import 'package:salon_app/models/Product.dart';
+import 'package:salon_app/shop/SelectPaymentScreen.dart';
 
 import '../Extensions.dart';
 
@@ -122,11 +123,11 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 child: FlatButton(
                   onPressed: ()=>{
                     if(isLoading == false) {
-                       submitProduct()
+                      goToSelectPaymentScreen()
                     }
                   },
                   child: Text(
-                    language["submit"],
+                    language["next"],
                     style: TextStyle(color: Colors.white,fontSize: 17,fontFamily: DataManager.shared.fontName()),
                   ),
                 ),
@@ -218,14 +219,40 @@ class _MyCartScreenState extends State<MyCartScreen> {
 
   }
 
-  submitProduct() async{
-    isLoading = true;
-    var sub = await DataManager.shared.submitCart({"":""});
-    isLoading = false;
-    setState(() {
-      this.cartList = [];
-    });
-    Navigator.pop(context);
+  goToSelectPaymentScreen() {
+    Navigator.of(context).push(_createRoute());
+  }
+
+  // submitProduct() async{
+  //   isLoading = true;
+  //   var sub = await DataManager.shared.submitCart({"":""});
+  //   isLoading = false;
+  //   setState(() {
+  //     this.cartList = [];
+  //   });
+  //   Navigator.pop(context);
+  // }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      transitionDuration: Duration(milliseconds: 400),
+      pageBuilder: (context, animation, secondaryAnimation) =>  SelectPaymentScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(-1.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+        var tween = Tween(begin: begin, end: end);
+        var curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      },
+    );
   }
 
 
