@@ -23,6 +23,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
   @override
   void initState() {
     fetchData();
+    print("zzzzzzz xxx ");
     super.initState();
   }
 

@@ -17,6 +17,7 @@ class SelectPaymentScreen extends StatefulWidget {
 class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
 
   bool _darkModeEnabled = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,13 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: 50,),
             Text(language["choose_Payment_type"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                DataManager.shared.business.cashPayment == false ? SizedBox() :
                 InkWell(
                   onTap: ()=>{
                     _submit(false)
@@ -83,7 +87,7 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
                     ),                child: Center(child: _itemView(language["cash"])),
                   ),
                 ),
-                InkWell(
+                DataManager.shared.business.creditCardPayment == false ? SizedBox() : InkWell(
                   onTap: ()=> {
                     _submit(true)
                   },
@@ -129,21 +133,26 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
   }
 
   _submit(bool isCredit) async{
-    // var urlPayment = "http://secure.cardcom.solutions/External/lowProfileClearing/137194.aspx?LowProfileCode=2c676c40-b83f-4713-890b-9c33eedb795c";//dictionary["payment_url"];
-    // Navigator.of(context).push(_createRoute(urlPayment));
-    // return;
+    if (isLoading == true) {
+      return;
+    }
+    isLoading = true;
     Map map = {"payment_method": isCredit ? "credit_card" : "cash"};
     var dictionary = await DataManager.shared.submitCart(map);
+    isLoading = false;
+
     if (isCredit == true && dictionary["payment_url"] != null) {
       var urlPayment = dictionary["payment_url"];
       Navigator.of(context).push(_createRoute(urlPayment));
+    }else{
+      Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
 
   Route _createRoute(url) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) =>  CreditCardWebView(url:url,isFromOrder: false,),
+      pageBuilder: (context, animation, secondaryAnimation) =>  CreditCardWebView(url:url,isFromOrder: true,),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(-1.0, 0.0);
         var end = Offset.zero;
