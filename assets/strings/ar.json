@@ -111,6 +111,6 @@
   "delete_user_label": "מחק משתמש",
   "payment_method": "طريقه الدفع",
   "cash": "نقدي",
-  "credit_card" : " بطاقة الائتمان"
-
+  "credit_card" : " بطاقة الائتمان",
+  "choose_Payment_type" : "اختر وسيلة الدفع"
 }

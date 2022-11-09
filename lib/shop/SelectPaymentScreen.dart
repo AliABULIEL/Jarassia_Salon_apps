@@ -59,46 +59,51 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
       appBar: appBar,
       backgroundColor: _darkModeEnabled ? Color(0xff252322) : Color(0xffF1F1F1),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            InkWell(
-              onTap: ()=>{
-                _submit(false)
-              },
-              child: Container(
-                width: size.width * 0.3,
-                height: size.width * 0.3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: color,
-                    border: Border.all(
-                        width: 2 ,
-                        color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
-                    )
+            Text(language["choose_Payment_type"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: ()=>{
+                    _submit(false)
+                  },
+                  child: Container(
+                    width: size.width * 0.3,
+                    height: size.width * 0.3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: color,
+                        border: Border.all(
+                            width: 2 ,
+                            color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                        )
 
-                ),                child: Center(child: _itemView(language["cash"])),
-              ),
-            ),
-            InkWell(
-              onTap: ()=> {
-                _submit(true)
-              },
-              child: Container(
-                width: size.width * 0.3,
-                height: size.width * 0.3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: color,
-                    border: Border.all(
-                        width: 2 ,
-                        color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
-                    )
-
+                    ),                child: Center(child: _itemView(language["cash"])),
+                  ),
                 ),
-                child: Center(child: _itemView(language["credit_card"])),
-              ),
-            )
+                InkWell(
+                  onTap: ()=> {
+                    _submit(true)
+                  },
+                  child: Container(
+                    width: size.width * 0.3,
+                    height: size.width * 0.3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: color,
+                        border: Border.all(
+                            width: 2 ,
+                            color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                        )
+
+                    ),
+                    child: Center(child: _itemView(language["credit_card"])),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

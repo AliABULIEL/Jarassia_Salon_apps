@@ -20,6 +20,7 @@ class Business {
 
   int order_min_days;
   bool creditCardPayment;
+  bool cashPayment;
 
   Business.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
@@ -35,7 +36,8 @@ class Business {
     latitude = json['latitude'];// ?? "32.724295";
     longitude = json['longitude'];// ?? "35.353369";
     pColor = json['color'];
-    creditCardPayment =  json['credit_card_payment'] == null ? false : json['credit_card_payment'];
+    creditCardPayment =  false;//json['credit_card_payment'] == null ? false : json['credit_card_payment'];
+    cashPayment =  true;//json['cash_payment'] == null ? false : json['cash_payment'];
 
     List m = json['social_links'];
     print(m);

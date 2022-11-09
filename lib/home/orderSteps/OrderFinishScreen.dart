@@ -56,6 +56,24 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       orderResult = widget.orderResult;
     }
 
+    _children.clear();
+
+    if (DataManager.shared.business.cashPayment == true && DataManager.shared.business.creditCardPayment == true){
+      _children[0] = Text(language['cash']);
+      _children[1] = Text(language['credit_card']);
+    }else if (DataManager.shared.business.creditCardPayment == true){
+      _children[0] = Text(language['credit_card']);
+      if (this.newMap != null) {
+        this.newMap["payment_method"] = "credit_card";
+      }
+    }else if (DataManager.shared.business.cashPayment == true){
+      _children[0] = Text(language['cash']);
+      if (this.newMap != null) {
+        this.newMap["payment_method"] = "cash";
+      }
+    }
+    print(_children);
+
     super.initState();
   }
 
@@ -127,7 +145,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                       _serviceNameView(size),
                       _serviceDateView(size),
                       _serviceTimeView(),
-                      (widget.order != null || widget.isEdit == true ) == false && DataManager.shared.business.creditCardPayment == true ? _serviceCashOrCard() : SizedBox(),
+                      (widget.order != null || widget.isEdit == true ) == false ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -236,7 +254,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****");
       print(data);
       if (data != null) {
-        if (data.paymentUrl != null) {
+        if (data.paymentUrl != null && data.paymentUrl != "") {
           _goToCreditCardView(data.paymentUrl);
         }else{
           _showSuccesAlert();
@@ -251,7 +269,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****2");
       print(data);
       if (data != null) {
-        if (data.paymentUrl != null) {
+        if (data.paymentUrl != null && data.paymentUrl != "") {
           _goToCreditCardView(data.paymentUrl);
         }else{
           _showSuccesAlert();
@@ -649,6 +667,9 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
   }
   int _currentSelection = 0;
   _serviceCashOrCard(){
+    if (DataManager.shared.business.creditCardPayment == false && DataManager.shared.business.cashPayment == false) {
+      return SizedBox();
+    }
     return  Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -666,10 +687,18 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
             onSegmentChosen: (index) {
               setState(() {
                 _currentSelection = index;
-                if (index == 1) {
-                  this.newMap["payment_method"] = "credit_card";
-                }else{
-                  this.newMap["payment_method"] = "cash";
+                if (DataManager.shared.business.creditCardPayment == true && DataManager.shared.business.cashPayment == true) {
+                  if (index == 1) {
+                    this.newMap["payment_method"] = "credit_card";
+                  }else{
+                    this.newMap["payment_method"] = "cash";
+                  }
+                }else {
+                  if (DataManager.shared.business.creditCardPayment == true) {
+                    this.newMap["payment_method"] = "credit_card";
+                  }else{
+                    this.newMap["payment_method"] = "cash";
+                  }
                 }
               });
             },

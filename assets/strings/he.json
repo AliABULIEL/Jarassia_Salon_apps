@@ -110,6 +110,6 @@
   "delete_user_label": "מחק משתמש",
   "payment_method": "אמצעי תשלום",
   "cash": "מזומן",
-  "credit_card" : "כרטיס אשראי"
-
+  "credit_card" : "כרטיס אשראי",
+  "choose_Payment_type" : "בחר אמצעי תשלום"
 }
