@@ -138,7 +138,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height-30,
                   ),
-                  child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       (orderResult == null || orderResult.user == null) && (this.newMap == null || this.newMap["first_name"] == null ) ? SizedBox() : _clientView(size),
                       _serviceView(size),
@@ -158,6 +159,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                           )
 
                           : SizedBox(),
+
                        orderResult == null ? SizedBox() : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -228,7 +230,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                               : SizedBox()
                         ],
                       ),
-                      SizedBox()
+                      SizedBox(height: 40,)
                     ],
                   ),
                 ),
