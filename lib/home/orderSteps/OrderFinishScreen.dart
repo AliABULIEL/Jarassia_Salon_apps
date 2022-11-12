@@ -139,13 +139,20 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                     maxHeight: MediaQuery.of(context).size.height-30,
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      SizedBox(height: 15,),
+
                       (orderResult == null || orderResult.user == null) && (this.newMap == null || this.newMap["first_name"] == null ) ? SizedBox() : _clientView(size),
+
                       _serviceView(size),
+                      SizedBox(height: 30,),
                       _serviceNameView(size),
+                      SizedBox(height: 30,),
                       _serviceDateView(size),
+                      SizedBox(height: 30,),
                       _serviceTimeView(),
+                      SizedBox(height: 30,),
                       (widget.order != null || widget.isEdit == true ) == false ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
                           Row(
@@ -159,6 +166,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                           )
 
                           : SizedBox(),
+                      SizedBox(height: 45,),
 
                        orderResult == null ? SizedBox() : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
