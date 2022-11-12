@@ -111,5 +111,6 @@
   "payment_method": "אמצעי תשלום",
   "cash": "מזומן",
   "credit_card" : "כרטיס אשראי",
-  "choose_Payment_type" : "בחר אמצעי תשלום"
+  "choose_Payment_type" : "בחר אמצעי תשלום",
+  "success_cash_message" : "ההזמנה בוצעה בהצלחה"
 }

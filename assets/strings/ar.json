@@ -112,5 +112,6 @@
   "payment_method": "طريقه الدفع",
   "cash": "نقدي",
   "credit_card" : " بطاقة الائتمان",
-  "choose_Payment_type" : "اختر وسيلة الدفع"
+  "choose_Payment_type" : "اختر وسيلة الدفع",
+  "success_cash_message" : "تم تقديم الطلب بنجاح"
 }

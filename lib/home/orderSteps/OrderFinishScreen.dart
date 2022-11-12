@@ -59,15 +59,15 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
     _children.clear();
 
     if (DataManager.shared.business.cashPayment == true && DataManager.shared.business.creditCardPayment == true){
-      _children[0] = Text(language['cash']);
-      _children[1] = Text(language['credit_card']);
+      _children[0] = Text(". " + language['cash'] + " .");
+      _children[1] = Text(". " + language['credit_card'] + " .");
     }else if (DataManager.shared.business.creditCardPayment == true){
-      _children[0] = Text(language['credit_card']);
+      _children[0] = Text(". " + language['credit_card'] + " .");
       if (this.newMap != null) {
         this.newMap["payment_method"] = "credit_card";
       }
     }else if (DataManager.shared.business.cashPayment == true){
-      _children[0] = Text(language['cash']);
+      _children[0] =  Text(". " + language['cash'] + " .");
       if (this.newMap != null) {
         this.newMap["payment_method"] = "cash";
       }
@@ -711,8 +711,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
   }
 
   Map<int, Widget> _children = {
-    0: Text(language['cash']),
-    1 : Text( " " + language['credit_card'] + " ")
+    0: Text( ". " + language['cash'] + " ."),
+    1 : Text( ". " + language['credit_card'] + " .")
 
   };
 

@@ -18,6 +18,9 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
 
   bool _darkModeEnabled = false;
   bool isLoading = false;
+  var showAlert = false;
+  var type = 0;
+  var title = language["success_cash_message"];
 
   @override
   Widget build(BuildContext context) {
@@ -59,57 +62,63 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
     return Scaffold(
       appBar: appBar,
       backgroundColor: _darkModeEnabled ? Color(0xff252322) : Color(0xffF1F1F1),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 50,),
-            Text(language["choose_Payment_type"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
               children: [
-                DataManager.shared.business.cashPayment == false ? SizedBox() :
-                InkWell(
-                  onTap: ()=>{
-                    _submit(false)
-                  },
-                  child: Container(
-                    width: size.width * 0.3,
-                    height: size.width * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: color,
-                        border: Border.all(
-                            width: 2 ,
-                            color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
-                        )
+                SizedBox(height: 50,),
+                Text(language["choose_Payment_type"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    DataManager.shared.business.cashPayment == false ? SizedBox() :
+                    InkWell(
+                      onTap: ()=>{
+                        _submit(false)
+                      },
+                      child: Container(
+                        width: size.width * 0.3,
+                        height: size.width * 0.3,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: color,
+                            border: Border.all(
+                                width: 2 ,
+                                color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                            )
 
-                    ),                child: Center(child: _itemView(language["cash"])),
-                  ),
-                ),
-                DataManager.shared.business.creditCardPayment == false ? SizedBox() : InkWell(
-                  onTap: ()=> {
-                    _submit(true)
-                  },
-                  child: Container(
-                    width: size.width * 0.3,
-                    height: size.width * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: color,
-                        border: Border.all(
-                            width: 2 ,
-                            color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
-                        )
-
+                        ),                child: Center(child: _itemView(language["cash"])),
+                      ),
                     ),
-                    child: Center(child: _itemView(language["credit_card"])),
-                  ),
-                )
+                    DataManager.shared.business.creditCardPayment == false ? SizedBox() : InkWell(
+                      onTap: ()=> {
+                        _submit(true)
+                      },
+                      child: Container(
+                        width: size.width * 0.3,
+                        height: size.width * 0.3,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: color,
+                            border: Border.all(
+                                width: 2 ,
+                                color:  Color(0xffF1F1F1)//HexColor.fromHex(DataManager.shared.business.pColor):
+                            )
+
+                        ),
+                        child: Center(child: _itemView(language["credit_card"])),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+          isLoading ? _loading() : SizedBox(),
+          showAlert ? _alertView() : SizedBox(),
+        ],
       ),
     );
   }
@@ -132,10 +141,81 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
     );
   }
 
+  _loading(){
+    var size = MediaQuery.of(context).size;
+    return InkWell(
+      onTap: (){
+        _showSuccesAlert();
+      },
+      child: Container(
+        width: size.width,
+        height: size.height,
+        color: Colors.black.withOpacity(0.75),
+      ),
+    );
+  }
+
+  _showLoadingAlert(){
+    setState(() {
+      type = 1;
+      showAlert = true;
+    });
+  }
+
+  _showSuccesAlert(){
+    setState(() {
+      type = 2;
+    });
+  }
+
+  _alertView(){
+    print("ali23232323232");
+    print(type);
+    print(showAlert);
+    var size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height,
+      width: size.width,
+      color: Colors.black.withOpacity(0.75),
+      child: Center(
+        child: InkWell(
+          onTap: (){
+            if (type == 2) {
+              showAlert = false;
+              type = 0;
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              //Navigator.of(context, rootNavigator: true).pop('dialog');
+
+
+            }
+          },
+          child: type != 2 ? SizedBox() : Container(
+            width: size.width * 0.65,
+            height: size.width * 0.3,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(6)),
+              color:Colors.white,
+            ),
+            child: Column(
+              children: [
+                SizedBox(height:10),
+                Text(type == 2 ? title : "...",style: TextStyle(color: Colors.black,fontSize: 22),),
+                Spacer(),
+                type == 2 ? Text(language["done"]) : SizedBox(),
+                SizedBox(height:15),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   _submit(bool isCredit) async{
     if (isLoading == true) {
       return;
     }
+    _showLoadingAlert();
     isLoading = true;
     Map map = {"payment_method": isCredit ? "credit_card" : "cash"};
     var dictionary = await DataManager.shared.submitCart(map);
@@ -145,7 +225,9 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
       var urlPayment = dictionary["payment_url"];
       Navigator.of(context).push(_createRoute(urlPayment));
     }else{
-      Navigator.of(context).popUntil((route) => route.isFirst);
+
+      _showSuccesAlert();
+      // Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
 
