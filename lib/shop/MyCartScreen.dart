@@ -175,7 +175,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                            image:CachedNetworkImageProvider(domainName + "/images/small/" +cart.image),
+                            image:CachedNetworkImageProvider(domainName + "/images/original/" +cart.image),
                             fit: BoxFit.cover
                         ),
                       ),

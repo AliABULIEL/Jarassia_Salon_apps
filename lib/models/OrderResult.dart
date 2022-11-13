@@ -15,6 +15,7 @@ class OrderResult {
   Employee employee;
   String date;
   String day;
+  String total;
   Time time;
   Order order ;
   User user ;
@@ -52,6 +53,9 @@ class OrderResult {
 
     if(json["payment_url"] != null) {
       paymentUrl = json["payment_url"];
+    }
+    if(json["total"] != null) {
+      total = json["total"].toString();
     }
     }
 

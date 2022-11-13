@@ -67,8 +67,11 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
           Center(
             child: Column(
               children: [
-                SizedBox(height: 50,),
+                SizedBox(height: 10,),
                 Text(language["choose_Payment_type"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+                SizedBox(height: 30,),
+                SizedBox(height: 100,),
+                Text(language["choose_Payment"],   style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),textAlign:TextAlign.right,),
                 SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

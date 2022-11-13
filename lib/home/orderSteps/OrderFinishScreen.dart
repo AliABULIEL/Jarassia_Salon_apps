@@ -81,6 +81,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
     orderResult = await DataManager.shared.getOrder(widget.order.id);
     setState(() {
       orderResult = orderResult;
+      print(1111);
+      print(orderResult);
     });
   }
 
@@ -152,6 +154,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                       _serviceDateView(size),
                       SizedBox(height: 30,),
                       _serviceTimeView(),
+                      SizedBox(height: 30,),
+                      _servicePriceView(),
                       SizedBox(height: 30,),
                       (widget.order != null || widget.isEdit == true ) == false ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
@@ -488,6 +492,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
 
   _clientView(Size size){
     print("show name");
+    print("wqewqeqw");
     print(this.newMap);
     return Center(
       child: Container(
@@ -620,7 +625,30 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       ),
     );
   }
-
+  _servicePriceView(){
+    return InkWell(
+      onTap: (){
+        print("_serviceTimeView");
+        _goTimeScreen();
+      },
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              color: _darkModeEnabled?Colors.black:Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: orderResult  == null ? SizedBox(): Text(orderResult.total,textAlign: TextAlign.center,
+                  style: TextStyle(color: _darkModeEnabled?Colors.grey:Colors.black,fontSize: 16,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+              ),
+            ),
+            Text(language["price"],textAlign: TextAlign.center,style: TextStyle(color: Colors.grey,fontSize: 17,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+          ],
+        ),
+      ),
+    );
+  }
   _serviceTimeView(){
     return InkWell(
       onTap: (){
