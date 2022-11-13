@@ -23,7 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String Buissness_id="1";
 
-final domainName = "http://moad.jarasia.co";
+final domainName = "http://marwanbarber.jarasia.co";
 
 class DataManager{
 
@@ -43,7 +43,7 @@ class DataManager{
   Business business;
   bool showNotifications = false;
 
-  final baseUrl = "http://moad.jarasia.co/api/";
+  final baseUrl = "http://marwanbarber.jarasia.co/api/";
 
   String lan;
 
@@ -1238,7 +1238,7 @@ class DataManager{
 
   }
 
-  Future<bool> submitCart(Map ma) async {
+  Future<Map> submitCart(Map ma) async {
     var result = {}..addAll({"business_id": Buissness_id})..addAll(ma);
     var body = jsonEncode(result);
     print("submit cart");
@@ -1258,7 +1258,7 @@ class DataManager{
     Map map = json.decode(response.body);
     print("res submit cart");
     print(map);
-    return true;
+    return map;
 
   }
 

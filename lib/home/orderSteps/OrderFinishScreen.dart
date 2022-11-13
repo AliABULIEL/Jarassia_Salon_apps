@@ -11,6 +11,9 @@ import 'package:salon_app/models/Order.dart';
 import 'package:salon_app/models/OrderResult.dart';
 import 'package:salon_app/models/User.dart';
 import '../../Extensions.dart';
+import 'package:material_segmented_control/material_segmented_control.dart';
+
+import '../../shop/CreditCardWebView.dart';
 
 
 class OrderFinishScreen extends StatefulWidget{
@@ -53,6 +56,24 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       orderResult = widget.orderResult;
     }
 
+    _children.clear();
+
+    if (DataManager.shared.business.cashPayment == true && DataManager.shared.business.creditCardPayment == true){
+      _children[0] = Text(". " + language['cash'] + " .");
+      _children[1] = Text(". " + language['credit_card'] + " .");
+    }else if (DataManager.shared.business.creditCardPayment == true){
+      _children[0] = Text(". " + language['credit_card'] + " .");
+      if (this.newMap != null) {
+        this.newMap["payment_method"] = "credit_card";
+      }
+    }else if (DataManager.shared.business.cashPayment == true){
+      _children[0] =  Text(". " + language['cash'] + " .");
+      if (this.newMap != null) {
+        this.newMap["payment_method"] = "cash";
+      }
+    }
+    print(_children);
+
     super.initState();
   }
 
@@ -60,6 +81,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
     orderResult = await DataManager.shared.getOrder(widget.order.id);
     setState(() {
       orderResult = orderResult;
+      print(1111);
+      print(orderResult);
     });
   }
 
@@ -117,13 +140,24 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                   constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height-30,
                   ),
-                  child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Column(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      SizedBox(height: 15,),
+
                       (orderResult == null || orderResult.user == null) && (this.newMap == null || this.newMap["first_name"] == null ) ? SizedBox() : _clientView(size),
+
                       _serviceView(size),
+                      SizedBox(height: 30,),
                       _serviceNameView(size),
+                      SizedBox(height: 30,),
                       _serviceDateView(size),
+                      SizedBox(height: 30,),
                       _serviceTimeView(),
+                      SizedBox(height: 30,),
+                      _servicePriceView(),
+                      SizedBox(height: 30,),
+                      (widget.order != null || widget.isEdit == true ) == false ? _serviceCashOrCard() : SizedBox(),
                       ((DataManager.shared.user.role != Role.client) && ((widget.order == null))) ? _serviceNoteView() : (widget.order != null && widget.order.notes != "") ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -136,6 +170,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                           )
 
                           : SizedBox(),
+                      SizedBox(height: 45,),
+
                        orderResult == null ? SizedBox() : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -157,7 +193,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                                 }
                                 },
                               child: Text(
-                                (widget.order != null || widget.isEdit == true )? language[widget.isEdit == true ? "save" : "update"] : language["sure"],
+                                (widget.order != null || widget.isEdit == true ) ? language[widget.isEdit == true ? "save" : "update"] : language["sure"],
                                 style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: DataManager.shared.fontName()),
                               ),
                             ),
@@ -206,7 +242,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
                               : SizedBox()
                         ],
                       ),
-                      SizedBox()
+                      SizedBox(height: 40,)
                     ],
                   ),
                 ),
@@ -222,6 +258,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
   }
 
   submitData() async{
+
     title = language["success_order_message"];
     _showLoadingAlert();
     this.newMap["business_id"] = Buissness_id;
@@ -231,7 +268,11 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****");
       print(data);
       if (data != null) {
-        _showSuccesAlert();
+        if (data.paymentUrl != null && data.paymentUrl != "") {
+          _goToCreditCardView(data.paymentUrl);
+        }else{
+          _showSuccesAlert();
+        }
       }else{
         setState(() {
           maxTime = true;
@@ -242,14 +283,21 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       print("zzzzzzzssscccsd*****2");
       print(data);
       if (data != null) {
-        _showSuccesAlert();
+        if (data.paymentUrl != null && data.paymentUrl != "") {
+          _goToCreditCardView(data.paymentUrl);
+        }else{
+          _showSuccesAlert();
+        }
       }else{
         setState(() {
           maxTime = true;
         });
       }
     }
+  }
 
+  _goToCreditCardView(String url) {
+    Navigator.of(context).push(_createRoute(CreditCardWebView(url: url ,isFromOrder: true,)));
   }
 
   cancelOrder() async{
@@ -444,6 +492,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
 
   _clientView(Size size){
     print("show name");
+    print("wqewqeqw");
     print(this.newMap);
     return Center(
       child: Container(
@@ -576,7 +625,30 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       ),
     );
   }
-
+  _servicePriceView(){
+    return InkWell(
+      onTap: (){
+        print("_serviceTimeView");
+        _goTimeScreen();
+      },
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              color: _darkModeEnabled?Colors.black:Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: orderResult  == null ? SizedBox(): Text(orderResult.total,textAlign: TextAlign.center,
+                  style: TextStyle(color: _darkModeEnabled?Colors.grey:Colors.black,fontSize: 16,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+              ),
+            ),
+            Text(language["price"],textAlign: TextAlign.center,style: TextStyle(color: Colors.grey,fontSize: 17,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+          ],
+        ),
+      ),
+    );
+  }
   _serviceTimeView(){
     return InkWell(
       onTap: (){
@@ -631,6 +703,56 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
           ),
       );
   }
+  int _currentSelection = 0;
+  _serviceCashOrCard(){
+    if (DataManager.shared.business.creditCardPayment == false && DataManager.shared.business.cashPayment == false) {
+      return SizedBox();
+    }
+    return  Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MaterialSegmentedControl(
+            horizontalPadding: EdgeInsets.all(14),
+            children: _children,
+            selectionIndex: _currentSelection,
+            borderColor: Colors.grey,
+            selectedColor: HexColor.fromHex(DataManager.shared.business.pColor),
+            unselectedColor: Colors.white,
+            borderRadius: 6.0,
+            //disabledChildren: _disabledIndices,
+            verticalOffset: 8.0,
+            onSegmentChosen: (index) {
+              setState(() {
+                _currentSelection = index;
+                if (DataManager.shared.business.creditCardPayment == true && DataManager.shared.business.cashPayment == true) {
+                  if (index == 1) {
+                    this.newMap["payment_method"] = "credit_card";
+                  }else{
+                    this.newMap["payment_method"] = "cash";
+                  }
+                }else {
+                  if (DataManager.shared.business.creditCardPayment == true) {
+                    this.newMap["payment_method"] = "credit_card";
+                  }else{
+                    this.newMap["payment_method"] = "cash";
+                  }
+                }
+              });
+            },
+          ),
+          Text(language["payment_method"],style: TextStyle(color: Colors.grey,fontSize: 17,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+
+        ],
+      )
+    );
+  }
+
+  Map<int, Widget> _children = {
+    0: Text( ". " + language['cash'] + " ."),
+    1 : Text( ". " + language['credit_card'] + " .")
+
+  };
 
   _maxOrderPopup(Size size) {
     return Container(
