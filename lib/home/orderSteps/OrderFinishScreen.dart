@@ -79,10 +79,11 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
 
   fetchData() async {
     orderResult = await DataManager.shared.getOrder(widget.order.id);
+    orderResult.total=orderResult.order.total.toString();
     setState(() {
       orderResult = orderResult;
       print(1111);
-      print(orderResult);
+      print(orderResult.order.total);
     });
   }
 
@@ -336,6 +337,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       "employee_id":this.newMap["employee_id"] == null ? orderResult.employee.id : this.newMap["employee_id"],
       "date": this.newMap["date"] == null ? orderResult.date : this.newMap["date"],
       "time":this.newMap["time"] == null ? orderResult.time : this.newMap["time"],
+      "total" :this.newMap["total"] == null ? orderResult.total : this.newMap["total"]
     };
 
     print("orderId");
@@ -891,7 +893,8 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       "services_id": orderResult.getServiceIds(),
       "employee_id": orderResult.employee.id,
       "date": orderResult.date,
-      "time": orderResult.time.start
+      "time": orderResult.time.start,
+      "total" : orderResult.total
     };
 
     return map;
