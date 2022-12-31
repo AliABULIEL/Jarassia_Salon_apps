@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salon_app/Signin/SigninScreen.dart';
+import 'package:salon_app/Signin/RegisterScreen.dart';
 import 'package:salon_app/home/orderSteps/SelectOrderTypeScreen.dart';
 import 'package:salon_app/home/widgets/menu.dart';
 import 'package:salon_app/managers/Datamanager.dart';
@@ -347,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
       transitionDuration: Duration(milliseconds: 400),
       pageBuilder: (context, animation, secondaryAnimation) =>
       isStory ?  StoriesScreen(index: index,) :
-      DataManager.shared.user == null ? SigninScreen(fromHome:true) : SelectOrderTypeScreen(),
+      DataManager.shared.user == null ? RegisterScreen() : SelectOrderTypeScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
