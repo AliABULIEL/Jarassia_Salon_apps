@@ -706,10 +706,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   _launchURL(String url) async {
+    print("url is" );
+    print(url);
 
-    if (await canLaunch(url)) {
+    try {
+
       await launch(url);
-    } else {
+    }
+    on Exception catch(_) {
       throw 'Could not launch $url';
     }
   }
