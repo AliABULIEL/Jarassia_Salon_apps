@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
       transitionDuration: Duration(milliseconds: 400),
       pageBuilder: (context, animation, secondaryAnimation) =>
       isStory ?  StoriesScreen(index: index,) :
-      DataManager.shared.user == null ? RegisterScreen() : SelectOrderTypeScreen(),
+      DataManager.shared.user == null ? RegisterScreen(fromHome:true) : SelectOrderTypeScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
