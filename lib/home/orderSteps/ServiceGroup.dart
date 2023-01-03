@@ -1,34 +1,33 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:salon_app/home/orderSteps/ServiceNameScreen.dart';
-import 'package:salon_app/home/orderSteps/ServiceTimeScreen.dart';
+import 'package:salon_app/home/orderSteps/ServiceScreen.dart';
 import 'package:salon_app/managers/Datamanager.dart';
 import 'package:salon_app/models/Day.dart';
 import 'package:salon_app/models/DemoLocalizations.dart';
-import 'package:salon_app/models/Employe.dart';
-import 'package:salon_app/models/OrderResult.dart';
 import 'package:salon_app/models/Service.dart';
+import 'package:salon_app/models/OrderResult.dart';
+import 'package:salon_app/models/Group.dart';
 
 import '../../Extensions.dart';
 
 
-class ServiceScreen extends StatefulWidget {
+class ServiceGroup extends StatefulWidget {
 
   OrderResult orderResult;
   Map map;
   bool isWorkshop = false;
 
-  ServiceScreen({this.orderResult,this.map,this.isWorkshop, int group});
+  ServiceGroup({this.orderResult,this.map,this.isWorkshop});
 
   @override
-  _ServiceScreenState createState() => _ServiceScreenState();
+  _ServiceGroupScreenState createState() => _ServiceGroupScreenState();
 }
 
-class _ServiceScreenState extends State<ServiceScreen> {
+class _ServiceGroupScreenState extends State<ServiceGroup> {
 
   bool _darkModeEnabled = false;
-  var selectIds = [];
-  var services = DataManager.shared.services;
+  var selectIds = -1;
+  var groups = DataManager.shared.groups;
   var isLoading = false;
   Map map;
 
@@ -36,38 +35,40 @@ class _ServiceScreenState extends State<ServiceScreen> {
   void initState() {
     print("isWorkshop");
     print(widget.isWorkshop);
+    fetchData();
     super.initState();
   }
 
   fetchData() async{
     if (widget.isWorkshop == null) {
-      var services = await DataManager.shared.fetchService({"business_id": Buissness_id});
+      var groups = await DataManager.shared.fetchGroups({"business_id": Buissness_id});
+      print(groups);
       if (widget.orderResult != null) {
-        print("update servicess");
-        this.selectIds = widget.orderResult.getServiceIds();
+        print("update groups");
+        this.selectIds = widget.orderResult.getGroupsIds();
       }else{
-        print("not update servicess");
+        print("not update groups");
 
       }
       setState(() {
-        this.services = DataManager.shared.services;
+        this.groups = DataManager.shared.groups;
       });
     }else{
 
       setState(() {
-        this.services = [];
+        this.groups = [];
       });
-      var services = await DataManager.shared.getWorkshopService(widget.map);
+      var ListView = await DataManager.shared.getWorkshopService(widget.map);
       if (widget.orderResult != null) {
-        print("update servicess");
+        print("update groups");
         this.selectIds = widget.orderResult.getServiceIds();
       }else{
-        print("not update servicess");
+        print("not update groups");
 
       }
-      if (services != null) {
+      if (groups != null) {
         setState(() {
-          this.services = services;
+          this.groups = groups;
         });
       }
 
@@ -106,7 +107,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
         )
       ],
       backgroundColor: _darkModeEnabled ? Colors.black : Colors.white,
-      title: Text(language["order_dower"],style: TextStyle(color: _darkModeEnabled ? Colors.white:Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+      title: Text(language["order_group"],style: TextStyle(color: _darkModeEnabled ? Colors.white:Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
       centerTitle: true,
     );
     return Scaffold(
@@ -121,17 +122,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(language["choose_service"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+                  Text(language["choose_services"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
                   SizedBox(height: 10,),
                   Container(
                       height:  size.height*0.21,
                       child: ListView.builder(
                           reverse: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: services.length, //users.length,
+                          itemCount: groups.length, //users.length,
                           itemBuilder: (context, idx) {
-                            var service = services[idx];
-                            return _item(size, service);
+                            var group = groups[idx];
+                            return _item(size, group);
                           }
                       )
                   ),
@@ -142,7 +143,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   //   }).toList(),
                   // ),
                   SizedBox(height: 20,),
-                  selectIds.length == 0 ? SizedBox() : Container(
+                  selectIds == -1 ? SizedBox() : Container(
                     height: 50,
                     width: (size.width * 0.9) * 0.44  ,
                     decoration: BoxDecoration(
@@ -152,8 +153,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     child: FlatButton(
                       onPressed: ()=>{
                         if (isLoading == false) {
+                          print("!!!!!!!!!!"),
+                          print(selectIds),
                           print("isLoading"),
-                          submitService()
+                          submitGroup()
                         }
                       },
                       child: Text(
@@ -181,17 +184,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
     );
   }
 
-  submitService() async{
+  submitGroup() async{
     isLoading = true;
     if (widget.isWorkshop == null) {
       print("not workshop");
-      map = {"services_id":this.selectIds};
-      var employees = await DataManager.shared.submitService(map);
+      map = {"groups_id":this.selectIds};
+      var services = await DataManager.shared.fetchService(map);
+      print(services);
       isLoading = false;
-      Navigator.of(context).push(_createRoute(employes: employees));
+      Navigator.of(context).push(_createRoute(services: services));
     }else{
       print("is workshop");
-      widget.map["workshop_id"] = this.selectIds.first;
+      widget.map["workshop_id"] = this.selectIds;
       print(widget.map);
       var days = await DataManager.shared.getWorkshopDays(widget.map);
       isLoading = false;
@@ -201,7 +205,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   }
 
-  _item(Size size,Service service){
+  _item(Size size,Group group){
     return Padding(
       padding: const EdgeInsets.only(left:12.0),
       child: Column(
@@ -210,10 +214,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
           InkWell(
             onTap: (){
               setState(() {
-                if (selectIds.contains(service.id)) {
-                  selectIds.removeWhere((element) => element == service.id);
-                }else{
-                  selectIds.add(service.id);
+                if (group.id != selectIds) {
+                  setState(() {
+                    selectIds = group.id;
+                  });
                 }
               });
             },
@@ -228,15 +232,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       borderRadius: BorderRadius.all(Radius.circular((size.width * 0.22)/2)),
                       border: Border.all(
                           width: 4,
-                          color: selectIds.contains(service.id) ? HexColor.fromHex(DataManager.shared.business.pColor) : Colors.black
+                          color: selectIds ==(group.id) ? HexColor.fromHex(DataManager.shared.business.pColor) : Colors.black
                       ),
-                      image: service.image  == null ? null : DecorationImage(
-                          image:CachedNetworkImageProvider(domainName + "/images/small/" + service.image),
+                      image: group.image  == null ? null : DecorationImage(
+                          image:CachedNetworkImageProvider(domainName + "/images/small/" + group.image),
                           fit: BoxFit.cover
                       )
                   ),
                 ),
-                selectIds.contains(service.id) ? Stack(
+                selectIds ==(group.id) ? Stack(
 
                   children: [
                     Icon(
@@ -254,16 +258,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
               ],
             ),
           ),
-          Text(service.name,textAlign: TextAlign.center,style: TextStyle(color: selectIds.contains(service.id)? HexColor.fromHex(DataManager.shared.business.pColor) : ( _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8)),fontSize: 14,fontFamily: DataManager.shared.fontName()),),
+          Text(group.name,textAlign: TextAlign.center,style: TextStyle(color: selectIds ==(group.id)? HexColor.fromHex(DataManager.shared.business.pColor) : ( _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8)),fontSize: 14,fontFamily: DataManager.shared.fontName()),),
         ],
       ),
     );
   }
 
-  Route _createRoute({List<Employee> employes,List<Day> days}) {
+  Route _createRoute({List<Service> services,List<Day> days}) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) => widget.isWorkshop != null ? ServiceTimeScreen(map: widget.map,days: days,orderResult: widget.orderResult,isWorkshop: true,) : ServiceNameScreen(employees: employes,map: this.map,orderResult: widget.orderResult,),
+      pageBuilder: (context, animation, secondaryAnimation) => widget.isWorkshop != null ? ServiceScreen() : ServiceScreen(map: this.map,orderResult: widget.orderResult,),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(-1.0, 0.0);
         var end = Offset.zero;
@@ -281,6 +285,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
       },
     );
   }
+
 
 }/*
 

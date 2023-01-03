@@ -3,6 +3,8 @@
 import 'package:salon_app/models/Day.dart';
 import 'package:salon_app/models/Employe.dart';
 import 'package:salon_app/models/Service.dart';
+import 'package:salon_app/models/Group.dart';
+
 import 'package:cool_alert/cool_alert.dart';
 
 import 'Order.dart';
@@ -12,6 +14,7 @@ import 'User.dart';
 class OrderResult {
 
   List<Service> services = List<Service>();
+  List<Group> groups = List<Group>();
   Employee employee;
   String date;
   String day;
@@ -62,6 +65,14 @@ class OrderResult {
   getServiceIds(){
     var ids = [];
     this.services.forEach((element) {
+      ids.add(element.id);
+    });
+    return ids;
+  }
+  getGroupsIds(){
+    var ids = [];
+    this.groups.forEach((element) {
+      print(element.id);
       ids.add(element.id);
     });
     return ids;

@@ -60,6 +60,8 @@
   "notifications": "התראות",
   "order_details": "פרטי התור",
   "order_dower": "קביעת תור",
+  "order_group": "קביעת קבוצת שירותים",
+  "choose_services" : "בחירת קבוצת תורים" ,
   "order_now": "הזמן תור ",
   "phone_number": "מספר טלפון",
   "policy": "אני מסכים/ה ",
