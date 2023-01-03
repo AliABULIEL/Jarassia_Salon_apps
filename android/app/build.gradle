@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "ac.il.eldon_barber"
+        applicationId "ac.il.hasan_abed"
         minSdkVersion 29
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()

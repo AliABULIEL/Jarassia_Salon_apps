@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>231984378071-efogljimivrpgi7mtf1at465cbt6cj1g.apps.googleusercontent.com</string>
+	<string>265745764921-rpeqo5ctruc7snlskdh5sfjsec43jgu6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.231984378071-efogljimivrpgi7mtf1at465cbt6cj1g</string>
+	<string>com.googleusercontent.apps.265745764921-rpeqo5ctruc7snlskdh5sfjsec43jgu6</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUsXoDVQwZJ4_I9Yeo24X82NiAx_v7Dls</string>
+	<string>AIzaSyAzLzxxdUqFnwiipzvenSEnjiPlkrJ6srs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>231984378071</string>
+	<string>265745764921</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.eldonbarber</string>
+	<string>com.dr.chow</string>
 	<key>PROJECT_ID</key>
-	<string>eldonbarber-56b7e</string>
+	<string>dr-chow</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eldonbarber-56b7e.appspot.com</string>
+	<string>dr-chow.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:231984378071:ios:0e0d79ea00a5dabf9e4092</string>
+	<string>1:265745764921:ios:4088b9da534110b46bf3e8</string>
 </dict>
 </plist>
