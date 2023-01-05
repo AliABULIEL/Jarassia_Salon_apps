@@ -9,6 +9,9 @@ import '../Extensions.dart';
 
 
 class RegisterScreen extends StatefulWidget{
+  Map map;
+  bool fromHome = false;
+  RegisterScreen({this.fromHome,this.map});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -205,8 +208,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(width: size.width * 0.7 / 2,),
               InkWell(onTap: ()=>{
                 print(123)
-              }, child: InkWell(onTap: (){
-                Navigator.pop(context);
+              }, child: InkWell(onTap: ()=>{
+                widget.map = null,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SigninScreen(), fullscreenDialog: true),
+                )
               },child: Text(language["sign_in"],style: TextStyle(color: HexColor.fromHex(DataManager.shared.business.pColor),fontSize: 15,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),))),
               SizedBox(width: 5,),
               Text(language["have_an_account"],style: TextStyle(color: Colors.grey,fontSize: 15,
