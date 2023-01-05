@@ -8,7 +8,7 @@ import 'package:salon_app/home/edits/EditBusnissScreen.dart';
 import 'package:salon_app/home/edits/EditUserScreen.dart';
 import 'package:salon_app/home/edits/WebScreen.dart';
 import 'package:salon_app/home/orderSteps/OrderFinishScreen.dart';
-import 'package:salon_app/home/orderSteps/SelectOrderTypeScreen.dart';
+import 'package:salon_app/home/orderSteps/ServiceGroup.dart';
 import 'package:salon_app/home/orderSteps/ServiceScreen.dart';
 import 'package:salon_app/home/widgets/menu.dart';
 import 'package:salon_app/managers/Datamanager.dart';
@@ -335,7 +335,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Route _createRoute(bool isOrder,bool isEdit) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) => isOrder == true ? isEdit == true ? OrderFinishScreen(order: selectOrder,isEdit: false,) : SelectOrderTypeScreen() : SigninScreen(fromHome:true),
+      pageBuilder: (context, animation, secondaryAnimation) => isOrder == true ? isEdit == true ? OrderFinishScreen(order: selectOrder,isEdit: false,) : ServiceGroup() : SigninScreen(fromHome:true),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;

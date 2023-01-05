@@ -13,6 +13,7 @@ import '../../Extensions.dart';
 
 class ServiceGroup extends StatefulWidget {
 
+
   OrderResult orderResult;
   Map map;
   bool isWorkshop = false;
@@ -25,6 +26,7 @@ class ServiceGroup extends StatefulWidget {
 
 class _ServiceGroupScreenState extends State<ServiceGroup> {
 
+
   bool _darkModeEnabled = false;
   var selectIds = -1;
   var groups = DataManager.shared.groups;
@@ -33,6 +35,7 @@ class _ServiceGroupScreenState extends State<ServiceGroup> {
 
   @override
   void initState() {
+    print("ali66");
     print("isWorkshop");
     print(widget.isWorkshop);
     fetchData();

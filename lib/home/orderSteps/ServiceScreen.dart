@@ -18,7 +18,7 @@ class ServiceScreen extends StatefulWidget {
   Map map;
   bool isWorkshop = false;
 
-  ServiceScreen({this.orderResult,this.map,this.isWorkshop, int group});
+  ServiceScreen({this.orderResult,this.map,this.isWorkshop});
 
   @override
   _ServiceScreenState createState() => _ServiceScreenState();
