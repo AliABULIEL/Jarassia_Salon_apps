@@ -721,7 +721,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   loc(){
     var bus = DataManager.shared.business;
-    var url = "https://waze.com/ul?q=" + bus.latitude + "," + bus.longitude + "&navigate=yes&zoom=17";
+    var url = "https://waze.com/ul?ll=" + bus.latitude + "," + bus.longitude + "&navigate=yes&zoom=17";
     print(url);
     String mapRequest = url;
     _launchURL(mapRequest);
