@@ -209,6 +209,38 @@ class DataManager{
       return null;
     }
   }
+  Future<List<Service>> fetchallService(Map ma) async {
+
+    var result = {}..addAll({"business_id": Buissness_id})..addAll(ma);
+    print("here!!!!");
+    var body = jsonEncode(result);
+
+    final response = await http.post(
+        Uri.parse(baseUrl + "all_services"),
+        body: body,
+        headers: {"Content-Type": "application/json",
+          "Accept": "application/json",
+          "Accept-Language":lan}
+    );
+
+    Map map = json.decode(response.body);
+    print("home fetch Service");
+    print("here!!!!");
+    print(map);
+
+    services = [];
+    if (map["services"] != null) {
+      List mL = map["services"];
+      mL.forEach((element) {
+        Service service = Service.fromJson(element);
+        services.add(service);
+
+      });
+      return services;
+    } else {
+      return null;
+    }
+  }
   Future<List<Service>> fetchService(Map ma) async {
 
     var result = {}..addAll({"business_id": Buissness_id})..addAll(ma);
@@ -225,6 +257,7 @@ class DataManager{
 
     Map map = json.decode(response.body);
     print("home fetch Service");
+    print("4444");
     print(map);
 
     services = [];

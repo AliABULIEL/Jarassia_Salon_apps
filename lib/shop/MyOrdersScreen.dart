@@ -131,7 +131,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
-                          image:CachedNetworkImageProvider(domainName + "/images/small/" +cart.image),
+                          image:CachedNetworkImageProvider(domainName + "/images/original/" +cart.image),
                           fit: BoxFit.cover
                       ),
                     ),
