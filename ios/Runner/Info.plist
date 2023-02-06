@@ -47,14 +47,11 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>io.flutter.embedded_views_preview</key>
-    <string>YES</string>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-      <!--Include to allow all connections (DANGER)-->
-      <key>NSAllowsArbitraryLoads</key>
-          <true/>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>need your premission for using photo for profile picture</string>
 	<key>NSCameraUsageDescription</key>
@@ -82,5 +79,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<string>YES</string>
 </dict>
 </plist>
