@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>231984378071-efogljimivrpgi7mtf1at465cbt6cj1g.apps.googleusercontent.com</string>
+	<string>213729660151-fkj7tmv7m4j44kirt8kp05mm4bpnqi8j.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.231984378071-efogljimivrpgi7mtf1at465cbt6cj1g</string>
+	<string>com.googleusercontent.apps.213729660151-fkj7tmv7m4j44kirt8kp05mm4bpnqi8j</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUsXoDVQwZJ4_I9Yeo24X82NiAx_v7Dls</string>
+	<string>AIzaSyB3BU_INS3egDrt5mPTd3sskZBg3dTWyR4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>231984378071</string>
+	<string>213729660151</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.eldonbarber</string>
+	<string>com.hamze.women</string>
 	<key>PROJECT_ID</key>
-	<string>eldonbarber-56b7e</string>
+	<string>hamze-women</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eldonbarber-56b7e.appspot.com</string>
+	<string>hamze-women.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:231984378071:ios:0e0d79ea00a5dabf9e4092</string>
+	<string>1:213729660151:ios:864b4a813e5da76daf17f2</string>
 </dict>
 </plist>
