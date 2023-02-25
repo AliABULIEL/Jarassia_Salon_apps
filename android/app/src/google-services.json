@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "231984378071",
-    "project_id": "eldonbarber-56b7e",
-    "storage_bucket": "eldonbarber-56b7e.appspot.com"
+    "project_number": "605068922192",
+    "project_id": "cousins-adff0",
+    "storage_bucket": "cousins-adff0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231984378071:android:beda9f153d282bb79e4092",
+        "mobilesdk_app_id": "1:605068922192:android:898eaa042530bc375cf055",
         "android_client_info": {
-          "package_name": "ac.il.eldon_barber"
+          "package_name": "ac.il.cousins"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+          "client_id": "605068922192-lmq2lt4sejb7vcb67hhp2l00to93ilhh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBHf4E2tmL1e9AnO81cw2EoU182Z6NtETY"
+          "current_key": "AIzaSyBrfEkWlDmKQhbh5dHBqv_OuAE6QxbSK2c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+              "client_id": "605068922192-lmq2lt4sejb7vcb67hhp2l00to93ilhh.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "605068922192-r8lo9llp242krtor4hm3tavpc2ikn89n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cousins.app"
+              }
             }
           ]
         }
