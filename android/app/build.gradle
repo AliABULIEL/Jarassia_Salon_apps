@@ -47,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "ac.il.eldon_barber"
+        applicationId "ac.il.bylina"
         minSdkVersion 29
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()

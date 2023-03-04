@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>231984378071-efogljimivrpgi7mtf1at465cbt6cj1g.apps.googleusercontent.com</string>
+	<string>952304453097-f34i3vp0cbe1q41905f1au1ad7fj5p2h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.231984378071-efogljimivrpgi7mtf1at465cbt6cj1g</string>
+	<string>com.googleusercontent.apps.952304453097-f34i3vp0cbe1q41905f1au1ad7fj5p2h</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUsXoDVQwZJ4_I9Yeo24X82NiAx_v7Dls</string>
+	<string>AIzaSyDSn5gAIuSi-sjx0PFUomh3MkgzcsqH0KM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>231984378071</string>
+	<string>952304453097</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.eldonbarber</string>
+	<string>com.byliina</string>
 	<key>PROJECT_ID</key>
-	<string>eldonbarber-56b7e</string>
+	<string>bylina-88747</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eldonbarber-56b7e.appspot.com</string>
+	<string>bylina-88747.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:231984378071:ios:0e0d79ea00a5dabf9e4092</string>
+	<string>1:952304453097:ios:3fec90762779ce98bb3778</string>
 </dict>
 </plist>
