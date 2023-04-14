@@ -11,6 +11,7 @@ import 'package:salon_app/models/Notification.dart';
 import 'package:salon_app/models/Order.dart';
 import 'package:salon_app/models/OrderResult.dart';
 import 'package:salon_app/models/Product.dart';
+import 'package:salon_app/models/ProductGroups.dart';
 import 'package:salon_app/models/Service.dart';
 import 'package:salon_app/models/Story.dart';
 import 'package:salon_app/models/User.dart';
@@ -24,7 +25,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String Buissness_id="1";
 
-final domainName = "http://hasan_abed.jarasia.co";
+final domainName = "http://hamze_men.jarasia.co";
 
 class DataManager{
 
@@ -39,13 +40,15 @@ class DataManager{
   List<Order> archivedOrders = new List<Order>();
   List<Order> waitApproveOrders = new List<Order>();
   List<Product> products = new List<Product>();
+  List<ProductGroups> productsgroups = new List<ProductGroups>();
+
   List<UserOrder> myOrders = new List<UserOrder>();
   TabController tabController;
 
   Business business;
   bool showNotifications = false;
 
-  final baseUrl = "http://hasan_abed.jarasia.co/api/";
+  final baseUrl = "http://hamze_men.jarasia.co/api/";
 
   String lan;
 
@@ -1222,10 +1225,41 @@ class DataManager{
     return clients;
 
   }
-
-  Future<List<Product>> getProducts() async {
-
+  Future<List<ProductGroups>> getProductsGroups() async {
+    print("LLLLLLLLL");
     var body = jsonEncode({"business_id": Buissness_id});
+    final response = await http.post(
+        Uri.parse(baseUrl + "get_productgroups"),
+        body: body,
+        headers: {
+          "Authorization": "Bearer ${token}",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Accept-Language": lan}
+    );
+
+    Map map = json.decode(response.body);
+    print("get produts d");
+    print(token);
+    print(baseUrl + "get_productgroups");
+    print(response.body);
+    print(map);
+
+    List<ProductGroups> prodcuts_groups = new List<ProductGroups>();
+
+    List mL = map["ProductGroups"];
+    mL.forEach((element) {
+      ProductGroups prodcut_groups = ProductGroups.fromJson(element);
+      prodcuts_groups.add(prodcut_groups);
+    });
+    this.productsgroups = prodcuts_groups;
+    return prodcuts_groups;
+  }
+
+    Future<List<Product>> getProducts(group_id) async {
+    print("1!!!!!!1");
+    print(group_id);
+    var body = jsonEncode({"business_id": Buissness_id, "ProductGroup_id": group_id});
     final response = await http.post(
         Uri.parse( baseUrl + "products"),
         body: body,
