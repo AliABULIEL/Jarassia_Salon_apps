@@ -86,7 +86,7 @@ class _MarketScreenState extends State<MarketScreen> {
                 ),
               ),
             ),
-            Text(language["products"],style: TextStyle(fontWeight: FontWeight.bold,color: _darkModeEnabled ? Colors.white : Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+            Text(language["select_category"],style: TextStyle(fontWeight: FontWeight.bold,color: _darkModeEnabled ? Colors.white : Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
             InkWell(
               onTap: (){
                 MenuView(context: context).presentMenu();
