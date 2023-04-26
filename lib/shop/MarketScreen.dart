@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:salon_app/home/widgets/menu.dart';
 import 'package:salon_app/managers/Datamanager.dart';
 import 'package:salon_app/models/DemoLocalizations.dart';
-import 'package:salon_app/models/Product.dart';
-import 'package:salon_app/shop/MyCartScreen.dart';
-import 'package:salon_app/shop/ProductInfoScreen.dart';
+import 'package:salon_app/models/ProductGroups.dart';
+import 'package:salon_app/shop/MarketScreens.dart';
 
 import 'MyOrdersScreen.dart';
 
@@ -22,7 +21,7 @@ class _MarketScreenState extends State<MarketScreen> {
   bool _darkModeEnabled = false;
   bool isLoading = false;
   int indexHeaderSelected = 0;
-  List<Product> products = new List<Product>();
+  List<ProductGroups> products_groups = new List<ProductGroups>();
 
 
   @override
@@ -34,7 +33,7 @@ class _MarketScreenState extends State<MarketScreen> {
 
   fetchProducts() async{
     isLoading = true;
-    var products = await DataManager.shared.getProducts();
+    var products = await DataManager.shared.getProductsGroups();
     setState(() {
       products = products;
       isLoading = false;
@@ -87,7 +86,7 @@ class _MarketScreenState extends State<MarketScreen> {
                 ),
               ),
             ),
-            Text(language["products"],style: TextStyle(fontWeight: FontWeight.bold,color: _darkModeEnabled ? Colors.white : Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
+            Text(language["select_category"],style: TextStyle(fontWeight: FontWeight.bold,color: _darkModeEnabled ? Colors.white : Colors.black,fontSize: 17,fontFamily: DataManager.shared.fontName()),),
             InkWell(
               onTap: (){
                 MenuView(context: context).presentMenu();
@@ -115,20 +114,20 @@ class _MarketScreenState extends State<MarketScreen> {
     return Scaffold(
       backgroundColor: _darkModeEnabled ? Colors.black.withOpacity(0.9) : Color(0xffF5F5F5),
       appBar: appBar,
-      body: (isLoading == false && DataManager.shared.products.length == 0) ?
+      body: (isLoading == false && DataManager.shared.productsgroups.length == 0) ?
           Center(
             child:Text(language["product_empty"],style: TextStyle(color: Colors.grey,fontSize: 18,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
     )
           : Column(
             children: [
-              _headerView(),
+              // _headerView(),
               this.indexHeaderSelected == 1 ? Expanded(child: MyOrdersScreen()) :
               Expanded(
                 child: GridView.count(
                 crossAxisCount: 2,
         padding: EdgeInsets.all(4.0),
         childAspectRatio: 8.0/10.0,
-        children: DataManager.shared.products.map((e) => itemList(e)).toList(),
+        children: DataManager.shared.productsgroups.map((e) => itemList(e)).toList(),
       ),
               ),
             ],
@@ -138,31 +137,32 @@ class _MarketScreenState extends State<MarketScreen> {
 
   }
 
-  _headerView(){
-    return  Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          InkWell(onTap: (){
-            setState(() {
-              indexHeaderSelected = 0;
-            });
-          }, child: Container(child: Text(language["products"],style: TextStyle(fontSize: 19,color: indexHeaderSelected == 0 ? _darkModeEnabled ? Colors.white : Colors.black : Colors.grey,fontFamily: DataManager.shared.fontName()),))),
-          SizedBox(width: 40,),
-          InkWell(onTap: (){
-            setState(() {
-              indexHeaderSelected = 1;
-            });
-          }, child: Container( child: Text(language["my_orders"],style: TextStyle(fontSize: 19,color: indexHeaderSelected == 1 ? _darkModeEnabled ? Colors.white : Colors.black : Colors.grey,fontFamily: DataManager.shared.fontName()),))),
-          SizedBox(width: 20,),
-        ],
+  // _headerView(){
+  //   return  Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.end,
+  //       children: [
+  //         // InkWell(onTap: (){
+  //         //   setState(() {
+  //         //     indexHeaderSelected = 0;
+  //         //   });
+  //         // }, child: Container(child: Text(language["products"],style: TextStyle(fontSize: 19,color: indexHeaderSelected == 0 ? _darkModeEnabled ? Colors.white : Colors.black : Colors.grey,fontFamily: DataManager.shared.fontName()),))),
+  //         SizedBox(width: 40,),
+  //         // InkWell(onTap: (){
+  //         //   setState(() {
+  //         //     indexHeaderSelected = 1;
+  //         //   });
+  //         // },
+  //         //     child: Container( child: Text(language["my_orders"],style: TextStyle(fontSize: 19,color: indexHeaderSelected == 1 ? _darkModeEnabled ? Colors.white : Colors.black : Colors.grey,fontFamily: DataManager.shared.fontName()),))),
+  //         SizedBox(width: 20,),
+  //       ],
+  //
+  //     ),
+  //   );
+  // }
 
-      ),
-    );
-  }
-
-  Widget itemList(Product product){
+  Widget itemList(ProductGroups product){
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
@@ -174,7 +174,7 @@ class _MarketScreenState extends State<MarketScreen> {
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
-                     image:CachedNetworkImageProvider(domainName + "/images/original/" + product.images.first),
+                     image:CachedNetworkImageProvider(domainName + "/images/original/" + product.images[0]),
                     fit: BoxFit.cover
                 ),
                 boxShadow: [
@@ -205,7 +205,7 @@ class _MarketScreenState extends State<MarketScreen> {
                           children: [
                             Text(product.name,style: TextStyle(color: Colors.white,fontFamily: DataManager.shared.fontName()),),
                             SizedBox(height: 5,),
-                            Text("${product.price}₪",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
+                            // Text("${product.price}₪",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontFamily: DataManager.shared.fontName()),),
                           ],
                         ),
                       ),
@@ -219,10 +219,10 @@ class _MarketScreenState extends State<MarketScreen> {
         );
   }
 
-  Route _createRoute({Product product,bool isCart = false}) {
+  Route _createRoute({ProductGroups product,bool isCart = false}) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) => isCart ? MyCartScreen() : ProductInfoScreen(product: product,),
+      pageBuilder: (context, animation, secondaryAnimation) =>  MarketScreens(product) ,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(-1.0, 0.0);
         var end = Offset.zero;
@@ -232,6 +232,7 @@ class _MarketScreenState extends State<MarketScreen> {
           parent: animation,
           curve: curve,
         );
+
 
         return SlideTransition(
           position: tween.animate(curvedAnimation),

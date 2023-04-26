@@ -39,7 +39,6 @@
   "choose_time" : "اختر الوقت المناسب" ,
   "location" : "المكان" ,
   "notifications" : "التنبيهات" ,
-  "my_orders" : "حجوزاتي" ,
   "cancel" : "الغاء" ,
   "connect_us" : "خدماتنا" ,
   "connect_us_desc" : "بامكانكم مراسلتنا ونحن سنتواصل معكم بالوقت القريب",
@@ -117,5 +116,7 @@
   "choose_Payment_type" : "اختيار وسيلة الدفع",
   "success_cash_message" : "تم تقديم الطلب بنجاح",
   "choose_Payment" : ":اختر احدى وسائل الدفع رجاء",
-  "price" : "السعر للدفع"
+  "price" : "السعر للدفع",
+  "select_product" : "اختر منتج",
+  "select_category" : "اختر مجموعط منتجات"
 }

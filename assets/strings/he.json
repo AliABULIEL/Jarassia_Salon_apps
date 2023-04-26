@@ -116,5 +116,8 @@
   "choose_Payment_type" : "בחירת אמצעי תשלום",
   "success_cash_message" : "ההזמנה בוצעה בהצלחה",
   "choose_Payment" : ":נא לבחור אחד מהאפשריות: ",
-  "price" : "סכום לתשלום"
+  "price" : "סכום לתשלום",
+  "select_product" : "נא בחר מוצר",
+  "select_category" : "נא בחר קטגוריה"
+
 }
