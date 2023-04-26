@@ -119,22 +119,73 @@ class _ServiceScreenState extends State<ServiceScreen> {
             child: Container(
               width: size.width,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                // crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(language["choose_service"],style: TextStyle(color: _darkModeEnabled ? Colors.grey : Colors.black.withOpacity(0.8),fontSize: 17,fontFamily: DataManager.shared.fontName()),),
                   SizedBox(height: 10,),
                   Container(
-                      height:  size.height*0.21,
-                      child: ListView.builder(
-                          reverse: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: services.length, //users.length,
-                          itemBuilder: (context, idx) {
-                            var service = services[idx];
-                            return _item(size, service);
+                      height:  size.height *0.7,
+                      child:  ListView.builder(
+                        itemCount: (services.length / 3).ceil(),
+                        itemBuilder: (BuildContext context, int rowIndex) {
+                          int startIndex = rowIndex * 3;
+                          int endIndex = (startIndex + 3 < services.length) ? startIndex + 3 : services.length;
+                          List<Widget> column1Items = [];
+                          List<Widget> column2Items = [];
+                          List<Widget> column3Items = [];
+                          for (int i = startIndex; i < endIndex; i++) {
+                            var service = services[i];
+                            if (i % 3 == 0) {
+                              column2Items.add(_item(size, service));
+                            } else if (i%3 ==1){
+                              column1Items.add(_item(size, service));
+                            }
+                            else{
+                              column3Items.add(_item(size, service));
+                            }
+
                           }
-                      )
+                          column1Items.add(SizedBox());
+                          column2Items.add(SizedBox());
+                          column3Items.add(SizedBox());
+                          return Row(
+                            textDirection: TextDirection.rtl,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // Expanded(
+                              //   child: SizedBox(width: 1,),
+                              // ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: column1Items.reversed.toList(),
+                                ),
+                              ),
+                              // Expanded(
+                              //   child: SizedBox(width: 1,),
+                              // ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: column2Items.reversed.toList(),
+                                ),
+                              ),
+                              // Expanded(
+                              //   child: SizedBox(width: 1,),
+                              // ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: column3Items.reversed.toList(),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+
                   ),
+                  //
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.end,
                   //   children: services.map<Widget>((e) {
