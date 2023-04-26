@@ -174,7 +174,7 @@ class _MarketScreenState extends State<MarketScreen> {
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
-                     image:CachedNetworkImageProvider(domainName + "/images/small/" + product.images.first),
+                     image:CachedNetworkImageProvider(domainName + "/images/original/" + product.images.first),
                     fit: BoxFit.cover
                 ),
                 boxShadow: [

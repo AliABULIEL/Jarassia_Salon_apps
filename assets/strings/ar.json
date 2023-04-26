@@ -1,5 +1,6 @@
 {
   "sign_in" : "تسجيل الدخول" ,
+  "order_group": "اختيار مجموعط الادوار",
   "zzzzz" : "asdasdasd" ,
   "enter_phone" : "ادخل رقم الهاتف للمتابعة" ,
   "hi_u" : "اهلا بك" ,
@@ -29,6 +30,8 @@
   "choose_service_name" : "اختر مقدم الخدمة" ,
   "service_name" : "مقدم الخدمة" ,
   "choose_service" : "اختر الخدمة الملائمة" ,
+  "choose_services" : "اختر الخدمة الملائمة" ,
+  "choose_group" : "اختر المجموعط الملائمة" ,
   "order_dower" : "حجز دور" ,
   "choose_day" : "اختر الموعد المناسب" ,
   "time_day_1" : "الموعد" ,
@@ -98,7 +101,6 @@
   "total" : "المجموع",
   "cart_empty" : "السله فارغة",
   "product_empty" : "لا يوجد منتجات حاليا",
-  "my_orders" : "طلباتي",
   "shop" : "",
   "no_times_day" : "الحجوزات ممتلئه لليوم الذي اخترته",
   "submit_rating" : "שלח",

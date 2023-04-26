@@ -33,7 +33,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
   }
 
   fetchData() async{
-    var services = await DataManager.shared.fetchService({"business_id": Buissness_id});
+    var services = await DataManager.shared.fetchallService({"business_id": Buissness_id});
     if (mounted){
       setState(() {
         this.services = DataManager.shared.services;

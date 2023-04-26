@@ -5,7 +5,7 @@ import 'package:salon_app/models/DemoLocalizations.dart';
 import 'package:salon_app/models/Employe.dart';
 
 import '../../Extensions.dart';
-import 'ServiceScreen.dart';
+import 'ServiceGroup.dart';
 
 class SelectOrderTypeScreen extends StatefulWidget {
 
@@ -242,7 +242,7 @@ class _SelectOrderTypeScreenState extends State<SelectOrderTypeScreen> {
   Route _createRoute({List<Employee> list}) {
     return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (context, animation, secondaryAnimation) => selectId == 0 ?  ServiceNameScreen(employees: list,isWorkshop: true,) : ServiceScreen(),
+      pageBuilder: (context, animation, secondaryAnimation) => selectId == 0 ?  ServiceNameScreen(employees: list,isWorkshop: true,) : ServiceGroup(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(-1.0, 0.0);
         var end = Offset.zero;

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "231984378071",
-    "project_id": "eldonbarber-56b7e",
-    "storage_bucket": "eldonbarber-56b7e.appspot.com"
+    "project_number": "265745764921",
+    "project_id": "dr-chow",
+    "storage_bucket": "dr-chow.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231984378071:android:beda9f153d282bb79e4092",
+        "mobilesdk_app_id": "1:265745764921:android:092e5f80ce12c5a46bf3e8",
         "android_client_info": {
-          "package_name": "ac.il.eldon_barber"
+          "package_name": "ac.il.hasan_abed"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+          "client_id": "265745764921-mrk6ghopvmtemismr43uol3b91tqvglc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBHf4E2tmL1e9AnO81cw2EoU182Z6NtETY"
+          "current_key": "AIzaSyDFCmffkqy1kKcJpKjo9jh83TtIKlXaqJE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+              "client_id": "265745764921-mrk6ghopvmtemismr43uol3b91tqvglc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "265745764921-rpeqo5ctruc7snlskdh5sfjsec43jgu6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dr.chow"
+              }
             }
           ]
         }

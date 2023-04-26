@@ -3,6 +3,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:salon_app/home/orderSteps/ServiceNameScreen.dart';
 import 'package:salon_app/home/orderSteps/ServiceScreen.dart';
+import 'package:salon_app/home/orderSteps/ServiceGroup.dart';
 import 'package:salon_app/home/orderSteps/ServiceTimeScreen.dart';
 import 'package:salon_app/managers/Datamanager.dart';
 import 'package:salon_app/models/DemoLocalizations.dart';
@@ -853,7 +854,7 @@ class _OrderFinishScreenState extends State<OrderFinishScreen> {
       if (orderResult.services.first.clientsCount > 0) {
         Navigator.of(context).push(_createRoute(ServiceScreen(orderResult: this.orderResult,map:{"employee_id":orderResult.employee.id},isWorkshop:orderResult.services.first.clientsCount > 0)));
       }else{
-        Navigator.of(context).push(_createRoute(ServiceScreen(orderResult: this.orderResult)));
+        Navigator.of(context).push(_createRoute(ServiceGroup(orderResult: this.orderResult)));
       }
     }
   }

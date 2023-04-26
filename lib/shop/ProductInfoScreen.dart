@@ -132,7 +132,7 @@ class _ProductInfoScreenState extends State<ProductInfoScreen> {
             decoration: BoxDecoration(
             color: Colors.grey,
             image: DecorationImage(
-                image:CachedNetworkImageProvider(domainName + "/images/small/" + widget.product.images[index]),
+                image:CachedNetworkImageProvider(domainName + "/images/original/" + widget.product.images[index]),
                 fit: BoxFit.cover
             ),
           ),
