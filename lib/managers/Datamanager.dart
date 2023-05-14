@@ -687,6 +687,10 @@ class DataManager{
     );
 
     Map map = json.decode(response.body);
+    if (map.containsKey('message')){
+      print("nooooow");
+      print(map['message']);
+    }
     print("submit Order  Finish");
     print(map);
     if (map.length == 1) {
