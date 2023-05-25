@@ -23,7 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String Buissness_id="1";
 
-final domainName = "http://by_lina.jarasia.co";
+final domainName = "http://elite_gentleman.jarasia.co";
 
 class DataManager{
 
@@ -43,7 +43,7 @@ class DataManager{
   Business business;
   bool showNotifications = false;
 
-  final baseUrl = "http://by_lina.jarasia.co/api/";
+  final baseUrl = "http://elite_gentleman.jarasia.co/api/";
 
   String lan;
 
