@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "231984378071",
-    "project_id": "eldonbarber-56b7e",
-    "storage_bucket": "eldonbarber-56b7e.appspot.com"
+    "project_number": "952304453097",
+    "project_id": "bylina-88747",
+    "storage_bucket": "bylina-88747.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231984378071:android:beda9f153d282bb79e4092",
+        "mobilesdk_app_id": "1:952304453097:android:699ca5c3dc9290b0bb3778",
         "android_client_info": {
-          "package_name": "ac.il.eldon_barber"
+          "package_name": "ac.il.bylina"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+          "client_id": "952304453097-nmlvfhffb0tg86orpstrr9l8is07oh9e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBHf4E2tmL1e9AnO81cw2EoU182Z6NtETY"
+          "current_key": "AIzaSyCgjbY-7F9t0jQflC32vCKJGzAdCeImIgs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231984378071-uest8fbf60vgstqpfej5sd375gcoq54e.apps.googleusercontent.com",
+              "client_id": "952304453097-nmlvfhffb0tg86orpstrr9l8is07oh9e.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "952304453097-f34i3vp0cbe1q41905f1au1ad7fj5p2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.byliina"
+              }
             }
           ]
         }
